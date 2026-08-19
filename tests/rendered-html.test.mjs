@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 async function render() {
@@ -51,4 +51,19 @@ test("keeps brand data centralized and removes starter dependencies", async () =
   assert.doesNotMatch(page, /https:\/\/booksy\.com|https:\/\/www\.instagram\.com/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.doesNotMatch(page, /href=["']#["']/);
+});
+
+test("connects all 11 supplied cut photos to the page", async () => {
+  const [config, imageFiles] = await Promise.all([
+    readFile(new URL("../lib/site.ts", import.meta.url), "utf8"),
+    readdir(new URL("../public/images/", import.meta.url)),
+  ]);
+
+  const suppliedCuts = imageFiles.filter((file) => /^corte \(\d+\)\.jpeg$/i.test(file));
+  const configuredCuts = new Set(
+    [...config.matchAll(/\/images\/corte \((\d+)\)\.jpeg/g)].map((match) => match[1]),
+  );
+
+  assert.equal(suppliedCuts.length, 11);
+  assert.deepEqual([...configuredCuts].sort((a, b) => Number(a) - Number(b)), ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]);
 });
