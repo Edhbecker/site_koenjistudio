@@ -220,7 +220,9 @@ export default function Home() {
             <p className="kicker">Owner / Barber / Koenji</p>
             <h2 id="bento-title">{ownerFirstName}<br /><em>{ownerRest.join(" ")}.</em></h2>
             <p>Proprietário e barbeiro à frente do Koenji Studio, Bento conduz o trabalho do studio a partir de uma visão que conecta técnica, identidade pessoal e cultura.</p>
-            <p className="content-note">Biografia provisória — pronta para receber a história real de Bento.</p>
+            {siteConfig.bentoBiographyNote && (
+              <p className="content-note">{siteConfig.bentoBiographyNote}</p>
+            )}
             <a className="button button-paper" href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer">Agendar com Bento ↗</a>
           </div>
           <div className="bento-words" aria-hidden="true">BARBER · OWNER · KOENJI · STYLE · CULTURE</div>

@@ -1,6 +1,7 @@
 export const siteConfig = {
   brandName: "Koenji Studio",
   ownerName: "Bento Eurides",
+  bentoBiographyNote: null as string | null,
   instagramHandle: "@koenjistudio",
   instagramUrl: "https://www.instagram.com/koenjistudio/",
   bookingUrl:
