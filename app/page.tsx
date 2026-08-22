@@ -178,7 +178,7 @@ export default function Home() {
         <div className="gallery-heading">
           <SectionLabel number="01.1">The space</SectionLabel>
           <h2 id="space-title">CONHEÇA<br />O ESPAÇO.</h2>
-          <p>Atmosfera, detalhe e presença.<br />A casa do Koenji.</p>
+          <p>Um espaço intimista, preparado para receber cada cliente com conforto, atenção e personalidade.</p>
         </div>
         <div className="studio-grid">
           {studioPhotos.map((photo, index) => (

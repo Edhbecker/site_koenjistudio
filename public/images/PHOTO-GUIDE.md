@@ -1,6 +1,8 @@
 # Guia de fotografias e marca
 
-As 11 fotografias `corte (1).jpeg` até `corte (11).jpeg` já estão conectadas ao Hero, à transição editorial, à galeria de cortes, à galeria visual do Studio e ao Instagram em `lib/site.ts`.
+As 11 fotografias `corte (1).jpeg` até `corte (11).jpeg` já estão conectadas ao Hero, à transição editorial, à galeria de cortes e ao Instagram em `lib/site.ts`.
+
+As quatro fotografias `espaco (1).jpeg` até `espaco (4).jpeg` apresentam o interior, a estação, os detalhes e a fachada na seção do Studio.
 
 O retrato `bento.jpeg` também está conectado ao quadro dedicado ao Bento.
 

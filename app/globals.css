@@ -118,12 +118,11 @@ button { color: inherit; font: inherit; }
 .gallery-heading h2 { grid-column: 1 / 3; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(64px, 11vw, 188px); font-weight: 400; line-height: .75; letter-spacing: -.075em; }
 .gallery-heading > p { margin: 0; font-size: 10px; line-height: 1.7; letter-spacing: .1em; text-transform: uppercase; }
 .studio-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: minmax(48px, 6vw); gap: clamp(10px, 1.4vw, 24px); }
-.studio-photo-1 { grid-column: 1 / 8; grid-row: 1 / 7; }
-.studio-photo-2 { grid-column: 9 / 13; grid-row: 3 / 8; }
-.studio-photo-3 { grid-column: 2 / 6; grid-row: 8 / 14; }
-.studio-photo-4 { grid-column: 6 / 13; grid-row: 9 / 15; }
-.studio-photo-5 { grid-column: 1 / 5; grid-row: 15 / 20; }
-.studio-photo-6 { grid-column: 6 / 11; grid-row: 16 / 22; }
+.studio-photo-1 { grid-column: 1 / 8; grid-row: 1 / 9; }
+.studio-photo-2 { grid-column: 9 / 13; grid-row: 2 / 9; }
+.studio-photo-3 { grid-column: 2 / 6; grid-row: 10 / 16; }
+.studio-photo-4 { grid-column: 6 / 13; grid-row: 10 / 17; }
+.studio-photo-4 > img { object-position: center 32%; }
 
 .cuts { padding-top: clamp(94px, 11vw, 174px); }
 .cuts-heading { display: grid; grid-template-columns: 3fr 1fr; align-items: end; gap: 40px; margin-bottom: clamp(70px, 9vw, 142px); }
@@ -249,7 +248,6 @@ button { color: inherit; font: inherit; }
   .studio-photo { grid-column: auto; grid-row: auto; aspect-ratio: .78; }
   .studio-photo-1, .studio-photo-4 { grid-column: 1 / -1; aspect-ratio: 1.2; }
   .studio-photo-3 { margin-top: 55px; }
-  .studio-photo-6 { margin-top: 35px; }
   .cuts-heading { display: block; margin-bottom: 60px; }
   .cuts-heading > p { margin-top: 30px; }
   .cuts-grid { grid-template-columns: 1fr 1fr; gap: 10px; }

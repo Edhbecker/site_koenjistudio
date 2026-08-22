@@ -6,7 +6,7 @@ export const siteConfig = {
   instagramUrl: "https://www.instagram.com/koenjistudio/",
   bookingUrl:
     "https://booksy.com/pt-br/dl/show-business/421566?utm_medium=c2c_referral",
-  // Mídia centralizada: os arquivos de corte reais alimentam as áreas visuais.
+  // Mídia centralizada: fotos reais de cortes e do espaço alimentam as áreas visuais.
   media: {
     logoLight: null as string | null,
     logoDark: null as string | null,
@@ -14,12 +14,10 @@ export const siteConfig = {
     editorialBreak: "/images/corte (2).jpeg" as string | null,
     bento: "/images/bento.jpeg",
     studio: [
-      "/images/corte (3).jpeg",
-      "/images/corte (7).jpeg",
-      "/images/corte (8).jpeg",
-      "/images/corte (10).jpeg",
-      "/images/corte (11).jpeg",
-      "/images/corte (6).jpeg",
+      "/images/espaco (1).jpeg",
+      "/images/espaco (2).jpeg",
+      "/images/espaco (3).jpeg",
+      "/images/espaco (4).jpeg",
     ] as (string | null)[],
     cuts: [
       "/images/corte (1).jpeg",
@@ -30,7 +28,7 @@ export const siteConfig = {
       "/images/corte (9).jpeg",
     ] as (string | null)[],
     instagram: [
-      "/images/corte (2).jpeg",
+      "/images/corte (10).jpeg",
       "/images/corte (5).jpeg",
       "/images/corte (8).jpeg",
       "/images/corte (11).jpeg",
@@ -39,12 +37,10 @@ export const siteConfig = {
 } as const;
 
 export const studioPhotos = [
-  { label: "Space / 01", file: "studio/studio-01.jpg" },
-  { label: "Detail / 02", file: "studio/studio-02.jpg" },
-  { label: "Barber station / 03", file: "studio/studio-03.jpg" },
-  { label: "Interior / 04", file: "studio/studio-04.jpg" },
-  { label: "Tools / 05", file: "studio/studio-05.jpg" },
-  { label: "Atmosphere / 06", file: "studio/studio-06.jpg" },
+  { label: "Interior / 01", file: "espaco (1).jpeg" },
+  { label: "Estação / 02", file: "espaco (2).jpeg" },
+  { label: "Detalhes / 03", file: "espaco (3).jpeg" },
+  { label: "Fachada / 04", file: "espaco (4).jpeg" },
 ] as const;
 
 // Categorias editoriais provisórias: confirme e ajuste conforme os serviços reais.

@@ -28,6 +28,10 @@ test("static export includes its entry point and essential assets", async () => 
     access(new URL("../out/og.png", import.meta.url)),
     access(new URL("../out/images/bento.jpeg", import.meta.url)),
     access(new URL("../out/images/corte (1).jpeg", import.meta.url)),
+    access(new URL("../out/images/espaco (1).jpeg", import.meta.url)),
+    access(new URL("../out/images/espaco (2).jpeg", import.meta.url)),
+    access(new URL("../out/images/espaco (3).jpeg", import.meta.url)),
+    access(new URL("../out/images/espaco (4).jpeg", import.meta.url)),
   ]);
 });
 
@@ -72,4 +76,19 @@ test("connects all 11 supplied cut photos to the page", async () => {
 
   assert.equal(suppliedCuts.length, 11);
   assert.deepEqual([...configuredCuts].sort((a, b) => Number(a) - Number(b)), ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]);
+});
+
+test("connects all four supplied studio photos to the space presentation", async () => {
+  const [config, imageFiles] = await Promise.all([
+    readFile(new URL("../lib/site.ts", import.meta.url), "utf8"),
+    readdir(new URL("../public/images/", import.meta.url)),
+  ]);
+
+  const suppliedSpaces = imageFiles.filter((file) => /^espaco \(\d+\)\.jpeg$/i.test(file));
+  const configuredSpaces = new Set(
+    [...config.matchAll(/\/images\/espaco \((\d+)\)\.jpeg/g)].map((match) => match[1]),
+  );
+
+  assert.equal(suppliedSpaces.length, 4);
+  assert.deepEqual([...configuredSpaces].sort((a, b) => Number(a) - Number(b)), ["1", "2", "3", "4"]);
 });
