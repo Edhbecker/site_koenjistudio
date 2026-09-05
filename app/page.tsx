@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { cutPhotos, siteConfig, studioPhotos } from "@/lib/site";
+import { cutPhotos, instagramPhotos, siteConfig, studioPhotos } from "@/lib/site";
 
 type PhotoFrameProps = {
   src: string | null;
@@ -11,14 +11,16 @@ type PhotoFrameProps = {
   label?: string;
   className?: string;
   priority?: boolean;
+  position?: string;
+  sizes?: string;
   tone?: "dark" | "mid" | "light";
 };
 
-function PhotoFrame({ src, alt, file, label, className = "", priority = false, tone = "mid" }: PhotoFrameProps) {
+function PhotoFrame({ src, alt, file, label, className = "", priority = false, position, sizes = "(max-width: 760px) 100vw, 50vw", tone = "mid" }: PhotoFrameProps) {
   return (
     <figure className={`photo-frame photo-${tone} ${className}`}>
       {src ? (
-        <Image src={src} alt={alt} fill sizes="(max-width: 720px) 100vw, 50vw" priority={priority} />
+        <Image src={src} alt={alt} fill sizes={sizes} priority={priority} style={position ? { objectPosition: position } : undefined} />
       ) : (
         <div className="photo-placeholder" role="img" aria-label={`Espaço reservado: ${alt}`}>
           <span>Foto oficial</span>
@@ -134,7 +136,7 @@ export default function Home() {
       <Header />
 
       <section className="hero" id="top" aria-labelledby="hero-title">
-        <PhotoFrame src={siteConfig.media.hero} alt="Bento trabalhando no Koenji Studio" file="hero/hero.jpg" className="hero-photo" priority tone="dark" />
+        <PhotoFrame src={siteConfig.media.hero} alt="Retrato em preto e branco com cabelo afro e barba" file="corte_v1 (3).jpeg" className="hero-photo" sizes="100vw" priority tone="dark" />
         <div className="hero-noise" aria-hidden="true" />
         <div className="hero-shade" aria-hidden="true" />
         <div className="hero-rail hero-rail-left" aria-hidden="true">KOENJI / 001<br />BARBERSHOP<br />VOL. 001</div>
@@ -182,7 +184,7 @@ export default function Home() {
         </div>
         <div className="studio-grid">
           {studioPhotos.map((photo, index) => (
-            <PhotoFrame key={photo.file} src={siteConfig.media.studio[index]} alt={`Ambiente do Koenji Studio — ${photo.label}`} file={photo.file} label={photo.label} className={`studio-photo studio-photo-${index + 1}`} tone={index % 3 === 0 ? "light" : index % 2 ? "dark" : "mid"} />
+            <PhotoFrame key={photo.file} src={siteConfig.media.studio[index]} alt={photo.alt} file={photo.file} position={photo.position} label={photo.label} className={`studio-photo studio-photo-${index + 1}`} tone={index % 3 === 0 ? "light" : index % 2 ? "dark" : "mid"} />
           ))}
         </div>
       </section>
@@ -195,7 +197,7 @@ export default function Home() {
         </div>
         <div className="cuts-grid">
           {cutPhotos.map((cut, index) => (
-            <PhotoFrame key={cut.file} src={siteConfig.media.cuts[index]} alt={`Trabalho de corte — ${cut.category}`} file={cut.file} label={`${cut.label} · ${cut.category}`} className={`cut-photo cut-photo-${index + 1}`} tone={index % 2 ? "dark" : "mid"} />
+            <PhotoFrame key={cut.file} src={siteConfig.media.cuts[index]} alt={cut.alt} file={cut.file} position={cut.position} label={`${cut.label} · ${cut.category}`} className={`cut-photo cut-photo-${index + 1}`} tone={index % 2 ? "dark" : "mid"} />
           ))}
         </div>
         <div className="section-booking">
@@ -205,7 +207,7 @@ export default function Home() {
       </section>
 
       <section className="editorial-break" aria-labelledby="identity-title">
-        <PhotoFrame src={siteConfig.media.editorialBreak} alt="Processo de corte no Koenji Studio" file="hero/editorial-break.jpg" className="break-photo" tone="dark" />
+        <PhotoFrame src={siteConfig.media.editorialBreak} alt="Retrato em preto e branco com cabelo afro e barba" file="corte_v1 (3).jpeg" className="break-photo" sizes="100vw" tone="dark" />
         <div className="break-overlay" aria-hidden="true" />
         <p className="break-tag">Koenji / Barbershop</p>
         <h2 id="identity-title">YOUR HAIR.<br />YOUR STYLE.<br /><em>YOUR IDENTITY.</em></h2>
@@ -249,8 +251,8 @@ export default function Home() {
           <div><p className="insta-handle">{siteConfig.instagramHandle}</p><a className="text-link" href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer">Seguir no Instagram ↗</a></div>
         </div>
         <a className="instagram-grid" href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Abrir o Instagram do Koenji Studio">
-          {["instagram-01.jpg", "instagram-02.jpg", "instagram-03.jpg", "instagram-04.jpg"].map((file, index) => (
-            <PhotoFrame key={file} src={siteConfig.media.instagram[index]} alt={`Publicação do Koenji Studio ${index + 1}`} file={`instagram/${file}`} className="instagram-photo" tone={index % 2 ? "light" : "mid"} />
+          {instagramPhotos.map((photo, index) => (
+            <PhotoFrame key={photo.file} src={siteConfig.media.instagram[index]} alt={photo.alt} file={photo.file} position={photo.position} className="instagram-photo" tone={index % 2 ? "light" : "mid"} />
           ))}
         </a>
       </section>

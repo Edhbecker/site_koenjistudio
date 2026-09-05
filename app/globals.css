@@ -86,6 +86,7 @@ button { color: inherit; font: inherit; }
 
 .hero { position: relative; display: grid; min-height: 100svh; overflow: hidden; isolation: isolate; background: #161511; }
 .hero-photo { position: absolute; z-index: -4; inset: 0; }
+.hero-photo > img { object-position: 50% 18%; }
 .hero-photo .photo-placeholder { background-color: #12110f; }
 .hero-noise { position: absolute; z-index: -1; inset: 0; pointer-events: none; opacity: .35; background-image: repeating-radial-gradient(circle at 30% 50%, rgba(231,224,202,.06) 0 1px, transparent 1px 4px); background-size: 6px 7px; mix-blend-mode: soft-light; }
 .hero-shade { position: absolute; z-index: -2; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.68), transparent 65%), linear-gradient(0deg, rgba(0,0,0,.8), transparent 52%); }
@@ -122,7 +123,6 @@ button { color: inherit; font: inherit; }
 .studio-photo-2 { grid-column: 9 / 13; grid-row: 2 / 9; }
 .studio-photo-3 { grid-column: 2 / 6; grid-row: 10 / 16; }
 .studio-photo-4 { grid-column: 6 / 13; grid-row: 10 / 17; }
-.studio-photo-4 > img { object-position: center 32%; }
 
 .cuts { padding-top: clamp(94px, 11vw, 174px); }
 .cuts-heading { display: grid; grid-template-columns: 3fr 1fr; align-items: end; gap: 40px; margin-bottom: clamp(70px, 9vw, 142px); }
@@ -228,6 +228,7 @@ button { color: inherit; font: inherit; }
   .brand-fallback span { margin-top: 13px; font-size: 6px; }
   .brand-fallback.brand-compact b { font-size: 21px; }
   .hero-content { padding: 122px 20px 30px; }
+  .hero-photo > img { object-position: 50% 50%; }
   .hero-footer { align-items: stretch; flex-direction: column; gap: 32px; margin-top: 55px; }
   .hero-actions { align-items: stretch; flex-direction: column; gap: 8px; }
   .hero-actions .button { width: 100%; }

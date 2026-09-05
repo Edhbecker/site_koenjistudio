@@ -6,6 +6,16 @@ async function render() {
   return readFile(new URL("../out/index.html", import.meta.url), "utf8");
 }
 
+function imageSources(html) {
+  return [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"[^>]*>/g)].map((match) => match[1]);
+}
+
+function section(html, attribute) {
+  const match = html.match(new RegExp(`<section\\b[^>]*${attribute}[^>]*>([\\s\\S]*?)<\\/section>`));
+  assert.ok(match, `Missing section: ${attribute}`);
+  return match[1];
+}
+
 test("static export contains the complete Koenji landing page and SEO", async () => {
   const html = await render();
   assert.match(html, /<html lang="pt-BR">/i);
@@ -27,12 +37,19 @@ test("static export includes its entry point and essential assets", async () => 
     access(new URL("../out/_next/", import.meta.url)),
     access(new URL("../out/og.png", import.meta.url)),
     access(new URL("../out/images/bento.jpeg", import.meta.url)),
-    access(new URL("../out/images/corte (1).jpeg", import.meta.url)),
-    access(new URL("../out/images/espaco (1).jpeg", import.meta.url)),
-    access(new URL("../out/images/espaco (2).jpeg", import.meta.url)),
-    access(new URL("../out/images/espaco (3).jpeg", import.meta.url)),
-    access(new URL("../out/images/espaco (4).jpeg", import.meta.url)),
   ]);
+
+  const sources = new Set(imageSources(await render()));
+  assert.equal(sources.size, 15, "Ten haircut photos, four studio photos and Bento's portrait");
+  for (const source of sources) {
+    assert.ok(source.startsWith("/images/"), `Expected a local photo: ${source}`);
+    const image = await readFile(new URL(`../out${source}`, import.meta.url));
+    if (source.endsWith(".webp")) {
+      assert.equal(image.toString("ascii", 0, 4), "RIFF");
+      assert.equal(image.toString("ascii", 8, 12), "WEBP");
+      assert.ok(image.length < 350 * 1024, `Photo exceeds the optimized asset budget: ${source}`);
+    }
+  }
 });
 
 test("uses the official Next.js static export configuration", async () => {
@@ -63,32 +80,45 @@ test("keeps brand data centralized and removes starter dependencies", async () =
   assert.doesNotMatch(page, /href=["']#["']/);
 });
 
-test("connects all 11 supplied cut photos to the page", async () => {
-  const [config, imageFiles] = await Promise.all([
-    readFile(new URL("../lib/site.ts", import.meta.url), "utf8"),
+test("connects all ten updated haircut photos without mixing in studio images", async () => {
+  const [html, imageFiles] = await Promise.all([
+    render(),
     readdir(new URL("../public/images/", import.meta.url)),
   ]);
 
-  const suppliedCuts = imageFiles.filter((file) => /^corte \(\d+\)\.jpeg$/i.test(file));
-  const configuredCuts = new Set(
-    [...config.matchAll(/\/images\/corte \((\d+)\)\.jpeg/g)].map((match) => match[1]),
-  );
+  const expectedSources = imageFiles
+    .filter((file) => /^corte_v[12] \(\d+\)\.(jpeg|PNG)$/.test(file))
+    .map((file) => file.replace(/^corte_v(\d) \((\d+)\)\.(jpeg|PNG)$/, "/images/optimized/corte-v$1-$2.webp"));
+  const cuts = imageSources(section(html, 'id="cuts"'));
+  const instagram = imageSources(section(html, 'id="instagram"'));
 
-  assert.equal(suppliedCuts.length, 11);
-  assert.deepEqual([...configuredCuts].sort((a, b) => Number(a) - Number(b)), ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]);
+  assert.equal(expectedSources.length, 10);
+  assert.equal(cuts.length, 6, "Preserve the six-frame haircut composition");
+  assert.equal(instagram.length, 4, "Preserve the four-frame Instagram composition");
+  assert.deepEqual([...new Set([...cuts, ...instagram])].sort(), expectedSources.sort());
 });
 
-test("connects all four supplied studio photos to the space presentation", async () => {
-  const [config, imageFiles] = await Promise.all([
-    readFile(new URL("../lib/site.ts", import.meta.url), "utf8"),
-    readdir(new URL("../public/images/", import.meta.url)),
+test("preserves the space gallery with complementary studio photos", async () => {
+  const html = await render();
+  const studio = section(html, 'aria-labelledby="space-title"');
+  assert.deepEqual(imageSources(studio), [
+    "/images/optimized/espaco-10.webp",
+    "/images/optimized/espaco-6.webp",
+    "/images/optimized/espaco-15.webp",
+    "/images/optimized/espaco-16.webp",
   ]);
+  assert.doesNotMatch(studio, /photo-placeholder/);
+});
 
-  const suppliedSpaces = imageFiles.filter((file) => /^espaco \(\d+\)\.jpeg$/i.test(file));
-  const configuredSpaces = new Set(
-    [...config.matchAll(/\/images\/espaco \((\d+)\)\.jpeg/g)].map((match) => match[1]),
-  );
+test("uses the requested afro portrait at the opening and preserves the editorial banner", async () => {
+  const html = await render();
+  const hero = section(html, 'id="top"');
+  const editorial = section(html, 'aria-labelledby="identity-title"');
+  const portrait = "/images/optimized/corte-v1-3.webp";
 
-  assert.equal(suppliedSpaces.length, 4);
-  assert.deepEqual([...configuredSpaces].sort((a, b) => Number(a) - Number(b)), ["1", "2", "3", "4"]);
+  assert.deepEqual(imageSources(hero), [portrait]);
+  assert.doesNotMatch(hero, /loading="lazy"/);
+  assert.deepEqual(imageSources(editorial), [portrait]);
+  assert.match(editorial, /Koenji \/ Barbershop/);
+  assert.match(editorial, /YOUR HAIR\.<br\s*\/>YOUR STYLE\.<br\s*\/><em>YOUR IDENTITY\.<\/em>/);
 });
