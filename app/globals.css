@@ -107,7 +107,7 @@ button { color: inherit; font: inherit; }
 .studio-intro { padding-bottom: clamp(96px, 14vw, 220px); }
 .intro-grid { display: grid; grid-template-columns: 1.1fr 4.6fr 2.3fr; align-items: start; gap: clamp(24px, 4vw, 76px); }
 .chapter-number { margin: -4.5vw 0 0; color: var(--rust); font-family: Georgia, "Times New Roman", serif; font-size: clamp(100px, 17vw, 270px); line-height: 1; letter-spacing: -.08em; opacity: .18; }
-.intro-grid h2, .cuts-heading h2, .experience-head h2, .booking-main h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(52px, 7.5vw, 132px); font-weight: 400; line-height: .82; letter-spacing: -.075em; text-transform: uppercase; }
+.intro-grid h2, .cuts-heading h2, .booking-main h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(52px, 7.5vw, 132px); font-weight: 400; line-height: .82; letter-spacing: -.075em; text-transform: uppercase; }
 .intro-grid h2 em, .cuts-heading h2 em, .booking-main h2 em { color: var(--rust); font-weight: 400; }
 .intro-copy { align-self: end; max-width: 420px; padding-top: 80px; }
 .intro-copy > p:first-child { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(20px, 2vw, 31px); line-height: 1.2; letter-spacing: -.025em; }
@@ -156,18 +156,6 @@ button { color: inherit; font: inherit; }
 .bento-copy > p:not(.kicker):not(.content-note) { max-width: 540px; margin: 0 0 25px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(20px, 2.1vw, 32px); line-height: 1.2; letter-spacing: -.02em; }
 .content-note { max-width: 430px; margin: 0 0 40px; padding-top: 16px; border-top: 1px solid var(--line-light); color: var(--paper-dim); font-size: 9px; line-height: 1.6; letter-spacing: .12em; text-transform: uppercase; }
 .bento-words { position: absolute; right: -14vw; bottom: -6vw; color: rgba(231,224,202,.055); font-family: Georgia, "Times New Roman", serif; font-size: clamp(52px, 9vw, 150px); white-space: nowrap; transform: rotate(-8deg); }
-
-.experience { padding-bottom: clamp(100px, 13vw, 210px); }
-.experience-head { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: clamp(72px, 9vw, 140px); }
-.experience-head h2 { font-size: clamp(54px, 8.2vw, 140px); }
-.experience-head > p { max-width: 220px; margin: 0 0 8px; font-family: Georgia, "Times New Roman", serif; font-size: 20px; font-style: italic; }
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; border-top: 1px solid var(--line-dark); list-style: none; }
-.steps li { position: relative; min-height: 300px; padding: 22px clamp(22px, 3vw, 52px) 28px 0; border-right: 1px solid var(--line-dark); }
-.steps li + li { padding-left: clamp(22px, 3vw, 52px); }
-.steps li:last-child { border-right: 0; }
-.steps span { font-size: 9px; letter-spacing: .13em; }
-.steps h3 { margin: 100px 0 15px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(30px, 3vw, 48px); font-weight: 400; letter-spacing: -.04em; text-transform: uppercase; }
-.steps p { max-width: 260px; margin: 0; font-size: 11px; line-height: 1.6; }
 
 .instagram-section { padding-top: clamp(90px, 10vw, 160px); }
 .instagram-head { display: flex; align-items: end; justify-content: space-between; gap: 50px; margin-bottom: clamp(64px, 8vw, 122px); }
@@ -239,7 +227,7 @@ button { color: inherit; font: inherit; }
   .marquee > div { padding: 12px 0 14px; }
   .intro-grid { display: block; }
   .chapter-number { margin: 0 0 -25px -8px; font-size: 132px; }
-  .intro-grid h2, .cuts-heading h2, .experience-head h2, .booking-main h2 { font-size: clamp(47px, 15vw, 76px); }
+  .intro-grid h2, .cuts-heading h2, .booking-main h2 { font-size: clamp(47px, 15vw, 76px); }
   .intro-copy { padding-top: 45px; }
   .intro-copy > p:first-child { font-size: 22px; }
   .gallery-heading { display: block; }
@@ -265,11 +253,6 @@ button { color: inherit; font: inherit; }
   .bento-copy { padding-top: 20px; }
   .bento-copy h2 { font-size: clamp(70px, 22vw, 112px); }
   .bento-words { bottom: 20%; font-size: 70px; }
-  .experience-head { align-items: flex-start; flex-direction: column; margin-bottom: 55px; }
-  .steps { grid-template-columns: 1fr; }
-  .steps li, .steps li + li { min-height: 220px; padding: 18px 0 28px; border-right: 0; border-bottom: 1px solid var(--line-dark); }
-  .steps li:last-child { border-bottom: 0; }
-  .steps h3 { margin-top: 65px; }
   .instagram-head { align-items: flex-start; flex-direction: column; margin-bottom: 50px; }
   .instagram-head h2 { font-size: clamp(65px, 20vw, 105px); }
   .instagram-grid { grid-template-columns: 1fr 1fr; gap: 8px; }

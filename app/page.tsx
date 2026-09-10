@@ -231,21 +231,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="experience paper-section section-pad" aria-labelledby="experience-title">
-        <SectionLabel number="04">The experience</SectionLabel>
-        <div className="experience-head">
-          <h2 id="experience-title">DA CONVERSA<br />À FINALIZAÇÃO.</h2>
-          <p>O corte começa antes da máquina.</p>
-        </div>
-        <ol className="steps">
-          <li><span>01</span><h3>Conversa</h3><p>Entender o estilo e o resultado buscado.</p></li>
-          <li><span>02</span><h3>Corte</h3><p>Respeitar cabelo, formato e identidade.</p></li>
-          <li><span>03</span><h3>Finalização</h3><p>Finalizar o visual e orientar a manutenção.</p></li>
-        </ol>
-      </section>
-
       <section className="instagram-section dark-section section-pad" id="instagram" aria-labelledby="instagram-title">
-        <SectionLabel number="05">Instagram</SectionLabel>
+        <SectionLabel number="04">Instagram</SectionLabel>
         <div className="instagram-head">
           <div><p className="kicker">Fresh cuts / Studio life / Culture</p><h2 id="instagram-title">FOLLOW<br /><em>THE CULTURE.</em></h2></div>
           <div><p className="insta-handle">{siteConfig.instagramHandle}</p><a className="text-link" href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer">Seguir no Instagram ↗</a></div>
